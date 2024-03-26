@@ -5,6 +5,10 @@ import pandas as pd
 import numpy as np
 import graphviz
 
+"""
+https://bioweb.pasteur.fr/docs/modules/graphviz/2.38.0/info/attrs.html#d:fillcolor
+"""
+
 
 def print_hi(name: str) -> None:
     # Use a breakpoint in the code line below to debug your script.
@@ -98,79 +102,74 @@ digraph BB {
     rankdir=LR;
     graph [newrank = true]; 
     node [shape=box];
-        
-    subgraph cluster0 {
-        rank=same
-        style=filled;
-        color=lightgrey;
-        node [style=filled,color=white];
-        a [label="С чем работать"];
-        # a1 [label="invis0"]
-        # a2 [label="invis1"]
-        # {rank = same; a; a1; a2};
+          
+    subgraph cluster0 {   
+        bgcolor=grey;
+        node [style=filled fillcolor=red];
         label = "INPUT";
         labeljust=c;
+        
+        a [label="С чем работать"];
     }
         
     subgraph cluster1 {
+        bgcolor=green;
+        node [style=filled fillcolor=orange]; 
         rank=same
-        style=filled;
-        color=lightgrey;
-        node [style=filled color=white];
         label = "MAGIC";
         labeljust=c;
+        
         b [label="Что тут может происходить"];
         
         subgraph clusterF1 {
-            style=filled;
-            color=orange;
-            node [style=filled color=white];
+            bgcolor=orange;
+            pencolor=black;
             label = "void smt1 (ch str, double c)";
             labeljust=c;
             # pr11 [label="ch str"]
             # pr12 [label="double c"]
             # return_f1 [label="return"];
-            descr_1 [label="asdasd qwer qeedf asf adsf \n qerfqewr qwefd aedf \nasdfqwer qdf asd qawer qew \nadasd a"];
-        }
+            # descr_1 [label="qweqw"];
+            descr_1 [shape=plaintext label=<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                  <TR>
+                        <TD PORT="descr"  BGCOLOR="lightgrey">longlonglonglonglong description<BR/>description<BR/>description</TD>
+                        <TD PORT="return" BGCOLOR="green">return</TD>
+                  </TR>
+            </TABLE>>];        }
         
         subgraph clusterF0 {
-            style=filled;
-            color=orange;
-            node [style=filled color=white];
+            bgcolor=orange;
+            pencolor=black;
             label = "int smt0 (int pr01, float pr02)";
-            labeljust=c;
-            # return_f0 [label="return"];
-            # pr02 [label="float b"]
-            # pr01 [label="int a"]    
-            # node [shape=record];
-            # descr [label="<f0> A |{<f0> B |<f0> C }|<f0> D"];  
-            # return_f0 [label="return"];
-            descr_0 [label="asdasd qwer qeedf asf adsf \n qerfqewr qwefd aedf \nasdfqwer qdf asd qawer qew \nadasd a"];
+            labeljust=c; 
+            descr_0 [shape=plaintext label=<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                  <TR>
+                        <TD PORT="descr"  BGCOLOR="lightgrey">longlonglonglonglong description<BR/>description<BR/>description</TD>
+                        <TD PORT="return" BGCOLOR="green">return</TD>
+                  </TR>
+            </TABLE>>];
         }
-        # {rank = same pr01 pr02 pr11 pr12};
     }
         
     subgraph cluster2 {
-        rank=same
-        style=filled;
-        color=lightgrey;
-        node [style=filled,color=white];
-        c [label="Результат"]
-        label = "OUTPUT";
-        labeljust=c;       
-        # c1 [style=invis]
-        # c2 [style=invis]
-        # {rank = same; c; c1; c2};
+        bgcolor=red;     
+        label = "OUTPUT";  
+        labeljust=c;              
+        node [style=filled fillcolor=grey];
+        c [label="Результат"]  
     }
     
-    0 [label="INPUT" style=filled color=grey fillcolor=grey];
-    1 [label="MAGIC" style=filled color=orange fillcolor=orange];
-    2 [label="OUTPUT" style=filled color=red fillcolor=red];
-    
+    0 [label="INPUT" style=filled fillcolor=grey];
+    1 [label="MAGIC" style=filled fillcolor=orange];
+    2 [label="OUTPUT" style=filled fillcolor=red];
+
     a -> b -> c;
     0 -> 1 -> 2;            
-    descr_0 -> descr_1; 
+    descr_0:return -> descr_1:return; 
 }
+
 """
 
 # Press the green button in the gutter to run the script.
