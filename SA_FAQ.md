@@ -225,7 +225,7 @@ FROM users
 WHERE split_part(rtrim(ltrim(fio)), ' ', 1) LIKE 'ИВАНОВ'
 ```
 
-<h2 id="SQL-SELECT">[SELECT](https://metanit.com/sql/postgresql/3.2.php)</h2>
+<h2 id="SQL-SELECT" href="https://metanit.com/sql/postgresql/3.2.php">SELECT</h2>
 Выбирает строки по идентификаторам (столбцам) из таблицы.
 
 ## [WHERE](https://metanit.com/sql/postgresql/3.3.php)
