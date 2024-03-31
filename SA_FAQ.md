@@ -200,7 +200,7 @@ BPEL-документы представляют собой инструкции
   
 [1](https://wiki.merionet.ru/articles/chto-takoe-crud)
 &nbsp;
-<img alt="CRUD0" src="/images/CRUD.png"/>
+<img alt="CRUD0" src="SA_init/images/CRUD.png"/>
 
 CRUD – это сокращение от Create (создание), Read (чтение), Update (модификация) и Delete (удаление). Эти четыре функции 
 являются ключевыми принципами, которым следуют разработчики и программисты API при создании надежных API. В соответствии с
