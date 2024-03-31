@@ -198,7 +198,7 @@ BPEL-документы представляют собой инструкции
 
 ---
 
-<h1 id="CRUD">CRUD</h1>
+<h1 id="CRUD" ur>CRUD</h1>
   
 [1](https://wiki.merionet.ru/articles/chto-takoe-crud)
 &nbsp;
@@ -225,7 +225,11 @@ FROM users
 WHERE split_part(rtrim(ltrim(fio)), ' ', 1) LIKE 'ИВАНОВ'
 ```
 
-<h2 id="SQL-SELECT" href="https://metanit.com/sql/postgresql/3.2.php">SELECT</h2>
+<h2 id="SQL-SELECT">
+  <a href="https://metanit.com/sql/postgresql/3.2.php">
+    SELECT
+  </a>
+</h2>
 Выбирает строки по идентификаторам (столбцам) из таблицы.
 
 ## [WHERE](https://metanit.com/sql/postgresql/3.3.php)
