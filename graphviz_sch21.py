@@ -404,8 +404,224 @@ int render4090RTX(const struct *maze,<BR/>
 
 """
 
+hand_breaker = """
+digraph hand_breaker {
+    label="hand_breaker"
+    labeljust=t;
+    rankdir=LR;    
+    # splines="line"; // Force edges to be straight, no curves or angles
+    # splines="ortho"; // Force edges to be straight, no curves or angles
+    
+    graph [newrank=true nodesep=0.05 ranksep=0.05 concentrate=true]; 
+    node [shape=box];
+    # packmode="graph";
+    
+    subgraph esp32 {
+        rank=same;
+        cluster=true;
+        label="ESP32_DEV
+FREENOVE
+ESP32 S3";
+        labeljust=t;  
+        href="https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf";   
+                
+        i2c [shape=plaintext labelloc="t" label=<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                <TR>
+                    <TD PORT="I2C" ROWSPAN="2">I2C</TD>          
+                </TR>
+                <TR>
+                    <TD PORT="I2C_chnl">SDA<BR/>SCL<BR/></TD>          
+                </TR>                                
+            </TABLE>>
+            width=1.5
+        ];  
+        
+        pwr [shape=plaintext labelloc="t" label=<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                <TR>
+                    <TD PORT="pwr">pwr</TD>          
+                </TR>                               
+            </TABLE>>
+            width=1.5
+        ];  
+        
+        interrupt [label="Interrupt PIN 19" width=1.5]
+        
+        GPIO [shape=plaintext labelloc="t" label=<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                <TR>
+                    <TD PORT="FS" ROWSPAN="14" VALIGN="TOP">flex_sensors</TD>              
+                </TR>
+                <TR>
+                    <TD>GPIO 36<BR/>
+GPIO 39<BR/>
+GPIO 34<BR/>
+GPIO 35<BR/>
+GPIO 32<BR/>
+GPIO 33<BR/>
+GPIO 25<BR/>
+GPIO 26<BR/>
+GPIO 27<BR/>
+GPIO 14<BR/>
+GPIO 13<BR/>
+GPIO 12<BR/>
+GPIO 23<BR/>
+</TD>             
+                </TR>            
+            </TABLE>>        
+        # height=3 width=1.5
+        ];                      
+    }   
+    
+    subgraph TCA9548A {
+        cluster=true;
+        label=TCA9548A;
+        labeljust=t;
+        TCA [shape=plaintext labelloc="t" label=<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+                <TR>
+                    <TD PORT="TCA_chnl">SDA_TCA<BR/>SCL_TCA</TD>
+                </TR>  
+            </TABLE>>
+            width=1.5
+         ];
+    }
+    
+    subgraph I2C_slaves {
+        cluster=true;
+        label=I2C_slaves;
+        labeljust=t;
+        
+        I2C_slaves [shape=plaintext labelloc="t" label=<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                <TR>
+                    <TD PORT="MPU_0" rowspan="3">MPU_0</TD>
+                </TR>  
+                <TR>
+                    <TD>SDA_SL_0<BR/>SCL_SL_0</TD>
+                </TR>
+                <TR>
+                    <TD PORT="Interrupt">Interrupt</TD>
+                </TR>
+                <TR>
+                    <TD PORT="MPU_1" rowspan="2">MPU_1</TD>
+                </TR>  
+                <TR>
+                    <TD>SDA_SL_1<BR/>SCL_SL_1</TD>
+                </TR>
+                <TR>
+                    <TD PORT="MPU_2" rowspan="2">MPU_2</TD>
+                </TR>  
+                <TR>
+                    <TD>SDA_SL_2<BR/>SCL_SL_2</TD>
+                </TR>  
+                <TR>
+                    <TD PORT="MPU_3" rowspan="2">MPU_3</TD>
+                </TR>  
+                <TR>
+                    <TD>SDA_SL_3<BR/>SCL_SL_3</TD>
+                </TR>    
+                <TR>
+                    <TD PORT="MPU_4" rowspan="2">MPU_4</TD>
+                </TR>  
+                <TR>
+                    <TD>SDA_SL_4<BR/>SCL_SL_4</TD>
+                </TR>  
+                <TR>
+                    <TD PORT="MPU_5" rowspan="2">MPU_5</TD>
+                </TR>  
+                <TR>
+                    <TD>SDA_SL_5<BR/>SCL_SL_5</TD>
+                </TR>  
+                <TR>
+                    <TD PORT="MPU_6" rowspan="2">MPU_6</TD>
+                </TR>  
+                <TR>
+                    <TD>SDA_SL_6<BR/>SCL_SL_6</TD>
+                </TR> 
+                <TR>
+                    <TD PORT="MPU_7" rowspan="2">MPU_7</TD>
+                </TR>  
+                <TR>
+                    <TD>SDA_SL_7<BR/>SCL_SL_7</TD>
+                </TR>  
+            </TABLE>>
+            width=1.5
+         ];
+    }    
+    
+    subgraph TP4056_cl {
+        # rank=same;
+        cluster=true;
+        label=TP4056;
+        labeljust=t;
+        
+        TP4056 [shape=plaintext labelloc="t" label=<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+                <TR>
+                    <TD PORT="TP4056" rowspan="4">BAZA</TD>
+                </TR>   
+                <TR>
+                    <TD PORT="B_plus">B+</TD>
+                </TR>
+                <TR>
+                    <TD PORT="TP4056_EDIT">
+                        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">                  
+                            <TR>
+                                <TD PORT="EDIT" rowspan="3">EDIT</TD>
+                            </TR>                
+                            <TR>
+                                <TD>PMOSFET Vg&lt;0.4V</TD>
+                            </TR>  
+                            <TR>
+                                <TD>Pull-down gate R=10kOm</TD>
+                            </TR>
+                        </TABLE>
+                    </TD>
+                </TR>  
+                <TR>
+                    <TD PORT="OUT_plus">OUT+</TD>
+                </TR>                     
+            </TABLE>>
+            width=1.5
+        ];
+    } 
+    
+    subgraph buck_boost_DC_DC {
+        cluster=true;
+        label="buck-boost DC-DC";
+        labeljust=t;
+        
+         STBB1[shape=plaintext labelloc="t" label=<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+                <TR>
+                    <TD PORT="STBB1">STBB1-APUR</TD>
+                </TR>                 
+            </TABLE>>
+            width=1.5
+        ];
+    } 
+    
+    i2c:I2C_chnl              ->       TCA:TCA_chnl     [label="2x{10k, 4.7k, 2.2k}" arrowhead=dot penwidth=1];
+    TCA:TCA_chnl:e            ->       I2C_slaves:MPU_0 [label="2x{10k, 4.7k, 2.2k}" arrowhead=dot penwidth=1];
+    interrupt:e               ->       I2C_slaves:Interrupt:w [arrowhead=dot penwidth=1];
+    TCA:TCA_chnl:e            ->       I2C_slaves:MPU_1 [label="2x{10k, 4.7k, 2.2k}" arrowhead=dot penwidth=1];
+    TCA:TCA_chnl:e            ->       I2C_slaves:MPU_2 [label="2x{10k, 4.7k, 2.2k}" arrowhead=dot penwidth=1];
+    TCA:TCA_chnl:e            ->       I2C_slaves:MPU_3 [label="2x{10k, 4.7k, 2.2k}" arrowhead=dot penwidth=1];
+    TCA:TCA_chnl:e            ->       I2C_slaves:MPU_4 [label="2x{10k, 4.7k, 2.2k}" arrowhead=dot penwidth=1];
+    TCA:TCA_chnl:e            ->       I2C_slaves:MPU_5 [label="2x{10k, 4.7k, 2.2k}" arrowhead=dot penwidth=1];
+    TCA:TCA_chnl:e            ->       I2C_slaves:MPU_6 [label="2x{10k, 4.7k, 2.2k}" arrowhead=dot penwidth=1];
+    TCA:TCA_chnl:e            ->       I2C_slaves:MPU_7 [label="2x{10k, 4.7k, 2.2k}" arrowhead=dot penwidth=1];
+ 
+    TP4056                    -> STBB1          -> pwr:pwr   [arrowhead=dot penwidth=1];      
+    
+    {rank=same  {GPIO -> interrupt -> i2c [style=invis]}}
+    {rank=same  {TP4056 -> STBB1 [style=invis]}}    
+}
+"""
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
-    graph_viz_save(sch21_maze, "sch21_maze", 1)
+    graph_viz_save(hand_breaker, "hand_breaker", 1)
