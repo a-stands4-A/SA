@@ -1,0 +1,75 @@
+@startuml
+skinparam responseMessageBelowArrow true
+skinparam actorStyle awesome
+
+title Школа 21 и Сбер
+
+actor PEER as peer
+participant sch21_t [
+=School 21
+----
+""бассейн""
+]
+participant sch21_prj [
+=School 21
+----
+""projects""
+]
+
+participant sch21_cv [
+=School 21
+----
+""резюме""
+]
+participant собеседования as собес
+participant pao_sber_intern[
+= ПАО СБЕР
+----
+""Стажировка""
+]
+participant pao_sber_job[
+= ПАО СБЕР
+----
+""Ставка""
+]
+
+[-> peer : Хочу\nстать\nпрограммистом
+
+== Школа 21 ==
+peer  -> sch21_t: Отбор 0
+hnote over peer, sch21_t
+Проплыть
+4 недели
+бассейна
+end hnote
+
+sch21_t  -> sch21_prj: Отбор 1
+hnote over sch21_t, sch21_prj
+* Соответствовать
+множеству параметров
+* Дождаться результатов
+end hnote
+
+sch21_prj -> sch21_cv++#FFBBBB: Выполнение\nпроектов
+hnote over sch21_prj , sch21_cv
+* Набрать 10 уровень
+* Закрыть языковой бассейн
+end hnote
+
+
+sch21_cv-> sch21_cv : Составление\nрезюме
+sch21_cv -> sch21_cv : Волна\nстажировок
+sch21_cv-> peer--: Приглашения
+
+
+peer -> собес: Требования и подготовка
+
+== Системный\nаналитик ==
+
+собес -> pao_sber_intern++#orange: Выборка
+pao_sber_intern -> pao_sber_intern: BootCamp
+pao_sber_intern -> pao_sber_intern: Рабочие\nзадачки
+pao_sber_intern -> pao_sber_job--: Рабочие\nзадачи
+
+pao_sber_job ->] : ЗП == 300 к/нс
+@enduml
